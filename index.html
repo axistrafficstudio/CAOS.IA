@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAOSIA Annual Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            overflow-x: auto;
+            overflow-y: hidden;
+            height: 100vh;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+        body::-webkit-scrollbar {
+            display: none; /* Chrome/Safari/Opera */
+        }
+        .horizontal-scroll-container {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            width: max-content;
+        }
+        .main-section {
+            min-width: 100vw;
+            height: 100vh;
+            scroll-snap-align: start;
+        }
+        .thumbnail-section {
+            width: 200vw;
+            scroll-snap-align: start;
+        }
+        .snap-scroll {
+            scroll-snap-type: x mandatory;
+        }
+        .transition-all-smooth {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mask-gradient {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+ 
+        /* Periodic Table Styles */
+        .periodic-cell {
+  width: 90px;
+  height: 90px;
+  background: #fffbe7;
+  border: 2px dashed #fbc02d;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fbc02d;
+  transition: background 0.2s, border 0.2s;
+  position: relative;
+}
+
+.periodic-cell.drag-over {
+  background: #fffde7;
+  border-color: #ffd600;
+}
+
+.periodic-cell.filled {
+  background: #ffe082;
+  border: 2px solid #43a047;
+  color: #43a047;
+}
+
+.draggable-element {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(251,192,45,0.13);
+  cursor: grab;
+  border: 2px solid transparent;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.draggable-element.dragging {
+  opacity: 0.6;
+  border: 2px dashed #fbc02d;
+  box-shadow: 0 4px 16px rgba(251,192,45,0.25);
+}
+    </style>
+</head>
+<body class="bg-gray-100 font-sans snap-scroll">
+    <!-- Navigation Arrows -->
+    <div class="fixed inset-y-0 left-0 z-50 flex items-center pl-4">
+        <button id="scrollLeft" class="p-2 rounded-full bg-white/70 backdrop-blur-sm shadow-lg hover:bg-white transition-all-smooth">
+            <i class="fas fa-chevron-left text-gray-700 text-xl"></i>
+        </button>
+    </div>
+    <div class="fixed inset-y-0 right-0 z-50 flex items-center pr-4">
+        <button id="scrollRight" class="p-2 rounded-full bg-white/70 backdrop-blur-sm shadow-lg hover:bg-white transition-all-smooth">
+            <i class="fas fa-chevron-right text-gray-700 text-xl"></i>
+        </button>
+    </div>
+
+    <div class="horizontal-scroll-container">
+        <!-- Main Cover Section -->
+        <section class="main-section flex items-center justify-center relative bg-gradient-to-br from-blue-800 to-teal-600">
+            <div class="absolute inset-0 bg-black/30"></div>
+            <div class="relative z-10 text-center px-8 max-w-4xl">
+                <div class="mb-8">
+                    <img src="https://via.placeholder.com/150x80/ffffff/000000?text=CAOSIA" alt="CAOSIA Logo" class="h-20 mx-auto mb-6">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">Annual Report 2023</h1>
+                    <p class="text-xl md:text-2xl text-white/90 mb-8">Shaping the future of certification through innovation and excellence</p>
+                </div>
+                <div class="animate-bounce pt-8">
+                    <p class="text-white mb-2">Scroll to explore</p>
+                    <div class="flex justify-center">
+                        <i class="fas fa-chevron-right text-white text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thumbnail Gallery Sections -->
+        <section class="main-section thumbnail-section bg-white">
+            <div class="h-full flex flex-col">
+                <!-- Section Title -->
+                <div class="pt-12 pb-6 px-12 text-center">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">CAOSIA Global Impact</h2>
+                    <p class="text-gray-600 max-w-3xl mx-auto">Discover our milestones, achievements, and vision for the future of certification</p>
+                </div>
+                
+                <!-- Thumbnail Grid -->
+                <div class="flex-1 overflow-y-hidden mask-gradient">
+                    <div class="h-full flex items-center px-8">
+                        <!-- Row 1 -->
+                        <div class="grid grid-cols-8 gap-6 w-full h-1/2">
+                            <!-- Item 1 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="certifications">
+                                <div class="h-24 bg-blue-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-certificate text-blue-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-blue-800 mb-1">Certifications</h3>
+                                <p class="text-xs text-gray-600">200+ new certifications in 2023</p>
+                            </div>
+                            
+                            <!-- Item 2 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="sustainability">
+                                <div class="h-24 bg-teal-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-leaf text-teal-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-teal-800 mb-1">Sustainability</h3>
+                                <p class="text-xs text-gray-600">Our green initiatives</p>
+                            </div>
+                            
+                            <!-- Item 3 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="innovation">
+                                <div class="h-24 bg-purple-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-lightbulb text-purple-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-purple-800 mb-1">Innovation</h3>
+                                <p class="text-xs text-gray-600">New certification programs</p>
+                            </div>
+                            
+                            <!-- Item 4 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="clients">
+                                <div class="h-24 bg-orange-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-building text-orange-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-orange-800 mb-1">Clients</h3>
+                                <p class="text-xs text-gray-600">Global success stories</p>
+                            </div>
+                            
+                            <!-- Item 5 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="growth">
+                                <div class="h-24 bg-indigo-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-indigo-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-indigo-800 mb-1">Growth</h3>
+                                <p class="text-xs text-gray-600">Expanding our reach</p>
+                            </div>
+                            
+                            <!-- Item 6 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="team">
+                                <div class="h-24 bg-pink-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-users text-pink-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-pink-800 mb-1">Team</h3>
+                                <p class="text-xs text-gray-600">Our global experts</p>
+                            </div>
+                            
+                            <!-- Item 7 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="technology">
+                                <div class="h-24 bg-emerald-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-microchip text-emerald-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-emerald-800 mb-1">Technology</h3>
+                                <p class="text-xs text-gray-600">Digital transformation</p>
+                            </div>
+                            
+                            <!-- Item 8 -->
+                            <div class="thumbnail-item bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl p-4 shadow-md cursor-pointer transition-all-smooth hover:shadow-lg hover:scale-105" data-target="future">
+                                <div class="h-24 bg-amber-200 rounded-lg mb-3 flex items-center justify-center">
+                                    <i class="fas fa-rocket text-amber-600 text-4xl"></i>
+                                </div>
+                                <h3 class="font-semibold text-amber-800 mb-1">Future</h3>
+                                <p class="text-xs text-gray-600">Our vision for 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Navigation Dots -->
+                <div class="pb-8 flex justify-center space-x-2">
+                    <div class="w-3 h-3 rounded-full bg-gray-300"></div>
+                    <div class="w-3 h-3 rounded-full bg-gray-700"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detail Sections (each corresponding to a thumbnail) -->
+        <!-- Certifications -->
+        <section class="main-section bg-gradient-to-br from-blue-50 to-blue-100">
+            <div class="h-full flex items-center justify-center">
+                <div class="max-w-5xl mx-auto px-8 py-12">
+                    <div class="flex flex-col md:flex-row gap-12 items-center">
+                        <div class="md:w-1/2">
+                            <div class="bg-white p-8 rounded-xl shadow-lg">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div>
+                                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Featured</span>
+                                        <h2 class="text-3xl font-bold text-gray-800 mt-2 mb-1">Certifications Growth</h2>
+                                        <div class="text-blue-600 mb-4">200+ new certifications in 2023</div>
+                                    </div>
+                                    <div class="text-5xl text-blue-500">01</div>
+                                </div>
+                                <div class="space-y-4 text-gray-700">
+                                    <p>CAOSIA has achieved remarkable growth in certifications across multiple industries, solidifying our position as a global leader in certification services.</p>
+                                    <p>Our innovative certification programs have helped businesses worldwide improve their processes, meet regulatory requirements, and gain competitive advantages in their markets.</p>
+                                    <p>Key sectors experiencing growth include renewable energy, sustainable manufacturing, and digital security certifications.</p>
+                                </div>
+                                <button class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all-smooth">
+                                    Download Report <i class="fas fa-download ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2">
+                            <div class="relative">
+                                <div class="absolute -inset-4 bg-blue-200 rounded-2xl transform rotate-2"></div>
+                                <img src="https://via.placeholder.com/600x400/3b82f6/ffffff?text=Certifications+Growth" alt="Certifications Growth" class="relative rounded-xl shadow-lg">
+                            </div>
+                            <div class="mt-6 grid grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl font-bold text-blue-600">42%</div>
+                                    <div class="text-xs text-gray-600">Increase YOY</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl font-bold text-blue-600">87</div>
+                                    <div class="text-xs text-gray-600">New standards</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl font-bold text-blue-600">56</div>
+                                    <div class="text-xs text-gray-600">Countries</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sustainability -->
+        <section class="main-section bg-gradient-to-br from-teal-50 to-teal-100">
+            <div class="h-full flex items-center justify-center">
+                <div class="max-w-5xl mx-auto px-8 py-12">
+                    <div class="flex flex-col md:flex-row gap-12 items-center">
+                        <div class="md:w-1/2 order-2 md:order-1">
+                            <div class="relative">
+                                <div class="absolute -inset-4 bg-teal-200 rounded-2xl transform -rotate-2"></div>
+                                <img src="https://via.placeholder.com/600x400/14b8a6/ffffff?text=Sustainability" alt="Sustainability" class="relative rounded-xl shadow-lg">
+                            </div>
+                            <div class="mt-6 grid grid-cols-3 gap-4">
+                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl font-bold text-teal-600">35%</div>
+                                    <div class="text-xs text-gray-600">Reduction target</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl font-bold text-teal-600">129</div>
+                                    <div class="text-xs text-gray-600">Green projects</div>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                                    <div class="text-2xl font-bold text-teal-600">100%</div>
+                                    <div class="text-xs text-gray-600">Carbon neutral</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 order-1 md:order-2">
+                            <div class="bg-white p-8 rounded-xl shadow-lg">
+                                <div class="flex justify-between items-start mb-6">
+                                    <div>
+                                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-teal-100 text-teal-800">Initiative</span>
+                                        <h2 class="text-3xl font-bold text-gray-800 mt-2 mb-1">Sustainable Future</h2>
+                                        <div class="text-teal-600 mb-4">Our green commitment</div>
+                                    </div>
+                                    <div class="text-5xl text-teal-500">02</div>
+                                </div>
+                                <div class="space-y-4 text-gray-700">
+                                    <p>CAOSIA has implemented comprehensive sustainability initiatives across all our operations, aligning with global environmental standards and the United Nations Sustainable Development Goals.</p>
+                                    <p>We've developed new certification programs focused on circular economy practices, carbon footprint reduction, and sustainable supply chain management.</p>
+                                    <p>Internally, we've achieved carbon-neutral operations and are working with clients to help them achieve their sustainability targets through our certification programs.</p>
+                                </div>
+                                <button class="mt-6 px-6 py-2 bg-teal-600 text-white rounded-full hover:bg-teal-700 transition-all-smooth">
+                                    Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section class="main-section bg-gradient-to-br from-yellow-50 to-yellow-100 flex items-center justify-center">
+          <div class="w-full max-w-5xl mx-auto px-8 py-12">
+            <h2 class="text-3xl font-bold text-yellow-700 mb-4 text-center">¡Coloca los elementos en la tabla periódica CAOSIA!</h2>
+            <p class="text-gray-700 mb-8 text-center">Arrastra cada imagen al casillero correcto según su símbolo.</p>
+            <div class="flex flex-col md:flex-row gap-8 items-center justify-center">
+              <!-- Tabla periódica simplificada -->
+              <div id="periodic-table" class="grid grid-cols-5 gap-4 bg-white/80 p-6 rounded-2xl shadow-lg">
+                <div class="periodic-cell" data-symbol="A">A</div>
+                <div class="periodic-cell" data-symbol="A2">A<sub>2</sub></div>
+                <div class="periodic-cell" data-symbol="C">C</div>
+                <div class="periodic-cell" data-symbol="O">O</div>
+                <div class="periodic-cell" data-symbol="Si">Si</div>
+              </div>
+              <!-- Imágenes para arrastrar -->
+              <div id="elements-bank" class="flex flex-col gap-4">
+                <img src="Images/a.png"   alt="A"   class="draggable-element" data-symbol="A" draggable="true">
+                <img src="Images/a2.png"  alt="A2"  class="draggable-element" data-symbol="A2" draggable="true">
+                <img src="Images/c.png"   alt="C"   class="draggable-element" data-symbol="C" draggable="true">
+                <img src="Images/o.png"   alt="O"   class="draggable-element" data-symbol="O" draggable="true">
+                <img src="Images/si.png"  alt="Si"  class="draggable-element" data-symbol="Si" draggable="true">
+              </div>
+            </div>
+            <div id="game-message" class="mt-8 text-center text-xl font-semibold text-green-700 hidden">¡Correcto! Has completado el juego.</div>
+          </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section class="main-section bg-gradient-to-br from-gray-800 to-gray-900">
+            <div class="h-full flex items-center justify-center">
+                <div class="max-w-4xl mx-auto px-8 py-12 text-center">
+                    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-12 shadow-xl">
+                        <img src="https://via.placeholder.com/150x80/ffffff/000000?text=CAOSIA" alt="CAOSIA Logo" class="h-16 mx-auto mb-8">
+                        <h2 class="text-4xl font-bold text-white mb-4">Get the Full Report</h2>
+                        <p class="text-xl text-white/90 mb-8">Access the complete CAOSIA Annual Report 2023 with all insights, data, and strategic vision for the future of certification.</p>
+                        <div class="max-w-md mx-auto">
+                            <form class="space-y-4">
+                                <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white">
+                                <input type="email" placeholder="Email Address" class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white">
+                                <input type="text" placeholder="Company" class="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white">
+                                <button type="submit" class="w-full px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-all-smooth">
+                                    Download Full Report <i class="fas fa-download ml-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="mt-8 flex justify-center space-x-6 text-white/80 text-sm">
+                            <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                            <a href="#" class="hover:text-white transition-colors">Terms of Use</a>
+                            <a href="#" class="hover:text-white transition-colors">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.horizontal-scroll-container');
+            const scrollLeftBtn = document.getElementById('scrollLeft');
+            const scrollRightBtn = document.getElementById('scrollRight');
+            const thumbnails = document.querySelectorAll('.thumbnail-item');
+            const mainSections = document.querySelectorAll('.main-section');
+            
+            let currentSection = 0;
+            const sectionCount = mainSections.length;
+            
+            // Scroll to section
+            function scrollToSection(index) {
+                if (index < 0) index = 0;
+                if (index >= sectionCount) index = sectionCount - 1;
+                
+                currentSection = index;
+                container.scrollTo({
+                    left: mainSections[index].offsetLeft,
+                    behavior: 'smooth'
+                });
+                
+                // Update active states
+                if (index === 0) {
+                    scrollLeftBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    scrollLeftBtn.disabled = true;
+                } else {
+                    scrollLeftBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    scrollLeftBtn.disabled = false;
+                }
+                
+                if (index === sectionCount - 1) {
+                    scrollRightBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    scrollRightBtn.disabled = true;
+                } else {
+                    scrollRightBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    scrollRightBtn.disabled = false;
+                }
+            }
+            
+            // Navigation controls
+            scrollLeftBtn.addEventListener('click', () => scrollToSection(currentSection - 1));
+            scrollRightBtn.addEventListener('click', () => scrollToSection(currentSection + 1));
+            
+            // Thumbnail click handlers
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', () => {
+                    const target = thumbnail.getAttribute('data-target');
+                    let targetIndex = 2; // Default to first content section
+                    
+                    // For a real implementation, you would map each thumbnail to its content section
+                    // This is simplified for the demo
+                    if (target === 'certifications') targetIndex = 2;
+                    if (target === 'sustainability') targetIndex = 3;
+                    // etc...
+                    
+                    scrollToSection(targetIndex);
+                });
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    scrollToSection(currentSection - 1);
+                } else if (e.key === 'ArrowRight') {
+                    scrollToSection(currentSection + 1);
+                }
+            });
+            
+            // Touch/swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const difference = touchStartX - touchEndX;
+                if (difference > 50) { // Swipe left
+                    scrollToSection(currentSection + 1);
+                } else if (difference < -50) { // Swipe right
+                    scrollToSection(currentSection - 1);
+                }
+            }
+            
+            // Convierte el scroll vertical en horizontal
+            container.addEventListener('wheel', function(e) {
+                if (e.deltaY !== 0) {
+                    e.preventDefault();
+                    container.scrollBy({
+                        left: e.deltaY,
+                        behavior: 'smooth'
+                    });
+                }
+            }, { passive: false });
+            
+            // --- Juego de la tabla periódica ---
+const cells = document.querySelectorAll('.periodic-cell');
+const draggables = document.querySelectorAll('.draggable-element');
+const message = document.getElementById('game-message');
+let filledCount = 0;
+
+draggables.forEach(el => {
+  el.addEventListener('dragstart', (e) => {
+    el.classList.add('dragging');
+    e.dataTransfer.setData('text/plain', el.dataset.symbol);
+    setTimeout(() => el.style.display = 'none', 0);
+  });
+  el.addEventListener('dragend', () => {
+    el.classList.remove('dragging');
+    el.style.display = '';
+  });
+});
+
+cells.forEach(cell => {
+  cell.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    if (!cell.classList.contains('filled')) cell.classList.add('drag-over');
+  });
+  cell.addEventListener('dragleave', () => {
+    cell.classList.remove('drag-over');
+  });
+  cell.addEventListener('drop', (e) => {
+    e.preventDefault();
+    cell.classList.remove('drag-over');
+    if (cell.classList.contains('filled')) return;
+    const symbol = e.dataTransfer.getData('text/plain');
+    if (cell.dataset.symbol === symbol) {
+      const img = document.querySelector(`.draggable-element[data-symbol="${symbol}"]`);
+      cell.innerHTML = '';
+      cell.appendChild(img);
+      cell.classList.add('filled');
+      filledCount++;
+      if (filledCount === 5) {
+        message.classList.remove('hidden');
+      }
+    }
+  });
+});
+            
+            // Initialize
+            scrollLeftBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            scrollLeftBtn.disabled = true;
+        });
+    </script>
+</body>
+</html>
