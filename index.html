@@ -9,11 +9,10 @@
     <style>
         /* Custom styles to complement Tailwind */
         body {
-            overflow-x: auto;
-            overflow-y: hidden;
+            overflow: hidden; /* Solo oculta el scroll del body */
             height: 100vh;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         body::-webkit-scrollbar {
             display: none; /* Chrome/Safari/Opera */
@@ -22,7 +21,11 @@
             display: flex;
             flex-direction: row;
             height: 100vh;
-            width: max-content;
+            width: 100vw; /* Cambia de max-content a 100vw */
+            overflow-x: auto; /* Permite scroll horizontal */
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
         }
         .main-section {
             min-width: 100vw;
