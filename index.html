@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAOSIA Annual Report</title>
+    <link rel="icon" type="image/png" href="logocaosia.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
         /* Custom styles to complement Tailwind */
         body {
+            font-family: 'Inter', 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 600;
             overflow: hidden; /* Solo oculta el scroll del body */
             height: 100vh;
             scrollbar-width: none;
@@ -110,10 +114,16 @@
     <div class="horizontal-scroll-container">
         <!-- Main Cover Section -->
         <section class="main-section flex items-center justify-center relative bg-gradient-to-br from-blue-800 to-teal-600">
-            <div class="absolute inset-0 bg-black/30"></div>
-            <div class="relative z-10 text-center px-8 max-w-4xl">
+            <!-- VIDEO DE FONDO -->
+            <video autoplay muted loop playsinline id="video-fondo"
+                style="position:absolute; left:0; top:0; width:100vw; height:100vh; object-fit:cover; z-index:0;">
+                <source src="18069235-uhd_3840_2160_24fps.mp4" type="video/mp4">
+                Tu navegador no soporta el vídeo de fondo.
+            </video>
+            <div class="absolute inset-0 bg-black/30 z-10"></div>
+            <div class="relative z-20 text-center px-8 max-w-4xl">
                 <div class="mb-8">
-                    <img src="https://via.placeholder.com/150x80/ffffff/000000?text=CAOSIA" alt="CAOSIA Logo" class="h-20 mx-auto mb-6">
+                    <img src="logocaosia.png" alt="CAOSIA Logo" class="h-20 mx-auto mb-6">
                     <h1 class="text-5xl md:text-7xl font-bold text-white mb-4">Annual Report 2023</h1>
                     <p class="text-xl md:text-2xl text-white/90 mb-8">Shaping the future of certification through innovation and excellence</p>
                 </div>
@@ -356,7 +366,7 @@
             <div class="h-full flex items-center justify-center">
                 <div class="max-w-4xl mx-auto px-8 py-12 text-center">
                     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-12 shadow-xl">
-                        <img src="https://via.placeholder.com/150x80/ffffff/000000?text=CAOSIA" alt="CAOSIA Logo" class="h-16 mx-auto mb-8">
+                        <img src="logocaosia.png" alt="CAOSIA Logo" class="h-16 mx-auto mb-8">
                         <h2 class="text-4xl font-bold text-white mb-4">Get the Full Report</h2>
                         <p class="text-xl text-white/90 mb-8">Access the complete CAOSIA Annual Report 2023 with all insights, data, and strategic vision for the future of certification.</p>
                         <div class="max-w-md mx-auto">
@@ -376,6 +386,51 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Nueva sección de Estadísticas CAOSIA -->
+        <section class="main-section relative bg-gradient-to-br from-gray-50 to-gray-200">
+            <!-- VIDEO DE FONDO -->
+            <video autoplay muted loop playsinline
+                style="position:absolute; left:0; top:0; width:100vw; height:100vh; object-fit:cover; z-index:0;">
+                <source src="18069134-uhd_2160_2160_24fps.mp4" type="video/mp4">
+                Tu navegador no soporta el vídeo de fondo.
+            </video>
+            <div class="absolute inset-0 bg-black/30 z-10"></div>
+            <div class="relative z-20 flex flex-col items-center justify-center h-full px-8">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8 mt-12 text-center drop-shadow-lg">CAOSIA en cifras</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mb-12">
+                    <div class="bg-white/80 rounded-xl p-8 shadow-lg flex flex-col items-center">
+                        <div class="text-5xl font-extrabold text-blue-700 mb-2">+200</div>
+                        <div class="text-lg font-semibold text-gray-700">Certificaciones en 2023</div>
+                    </div>
+                    <div class="bg-white/80 rounded-xl p-8 shadow-lg flex flex-col items-center">
+                        <div class="text-5xl font-extrabold text-green-700 mb-2">56</div>
+                        <div class="text-lg font-semibold text-gray-700">Países con presencia</div>
+                    </div>
+                    <div class="bg-white/80 rounded-xl p-8 shadow-lg flex flex-col items-center">
+                        <div class="text-5xl font-extrabold text-yellow-600 mb-2">42%</div>
+                        <div class="text-lg font-semibold text-gray-700">Crecimiento anual</div>
+                    </div>
+                </div>
+                <p class="text-white/90 text-xl text-center max-w-2xl drop-shadow-lg">
+                    CAOSIA sigue liderando la innovación y la excelencia en certificación, expandiendo su impacto global y promoviendo la sostenibilidad en todos los sectores.
+                </p>
+            </div>
+        </section>
+
+        <!-- Tercera sección (ejemplo: Innovation) -->
+        <section class="main-section bg-gradient-to-br from-purple-50 to-purple-100 relative">
+            <!-- VIDEO DE FONDO -->
+            <video autoplay muted loop playsinline
+                style="position:absolute; left:0; top:0; width:100vw; height:100vh; object-fit:cover; z-index:0;">
+                <source src="18069166-uhd_3840_2160_24fps.mp4" type="video/mp4">
+                Tu navegador no soporta el vídeo de fondo.
+            </video>
+            <div class="absolute inset-0 bg-black/20 z-10"></div>
+            <div class="relative z-20 h-full flex items-center justify-center">
+                <!-- ...contenido existente de la sección... -->
             </div>
         </section>
     </div>
