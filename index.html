@@ -99,6 +99,38 @@
     </style>
 </head>
 <body class="bg-gray-100 font-sans snap-scroll">
+    <!-- Header transparente sticky -->
+<header class="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-blue-700/70 via-teal-500/60 to-yellow-400/60 backdrop-blur-md shadow-none">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 py-2 md:py-3">
+    <div class="flex items-center gap-2">
+      <img src="logocaosia.png" alt="CAOSIA Logo" class="h-8 w-auto md:h-10">
+      <span class="font-bold text-base md:text-lg text-white drop-shadow">CAOSIA</span>
+    </div>
+    <button id="nav-toggle" class="md:hidden text-white text-2xl focus:outline-none">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul id="nav-menu" class="hidden md:flex gap-4 font-semibold text-white drop-shadow text-sm md:text-base">
+      <li><a href="#" onclick="scrollToSectionIndex(0)" class="hover:text-yellow-200 transition">Inicio</a></li>
+      <li><a href="#" onclick="scrollToSectionIndex(1)" class="hover:text-yellow-200 transition">Impacto</a></li>
+      <li><a href="#" onclick="scrollToSectionIndex(2)" class="hover:text-yellow-200 transition">Certificaciones</a></li>
+      <li><a href="#" onclick="scrollToSectionIndex(3)" class="hover:text-yellow-200 transition">Sostenibilidad</a></li>
+      <li><a href="#" onclick="scrollToSectionIndex(4)" class="hover:text-yellow-200 transition">Juego</a></li>
+      <li><a href="#" onclick="scrollToSectionIndex(5)" class="hover:text-yellow-200 transition">Estadísticas</a></li>
+      <li><a href="#" onclick="scrollToSectionIndex(6)" class="hover:text-yellow-200 transition">Contacto</a></li>
+    </ul>
+  </nav>
+  <!-- Menú móvil -->
+  <ul id="nav-mobile" class="md:hidden hidden flex-col gap-2 bg-white/90 text-blue-900 font-semibold absolute top-full left-0 w-full px-6 py-4 shadow-lg rounded-b-2xl">
+    <li><a href="#" onclick="scrollToSectionIndex(0);toggleNav()" class="block py-2">Inicio</a></li>
+    <li><a href="#" onclick="scrollToSectionIndex(1);toggleNav()" class="block py-2">Impacto</a></li>
+    <li><a href="#" onclick="scrollToSectionIndex(2);toggleNav()" class="block py-2">Certificaciones</a></li>
+    <li><a href="#" onclick="scrollToSectionIndex(3);toggleNav()" class="block py-2">Sostenibilidad</a></li>
+    <li><a href="#" onclick="scrollToSectionIndex(4);toggleNav()" class="block py-2">Juego</a></li>
+    <li><a href="#" onclick="scrollToSectionIndex(5);toggleNav()" class="block py-2">Estadísticas</a></li>
+    <li><a href="#" onclick="scrollToSectionIndex(6);toggleNav()" class="block py-2">Contacto</a></li>
+  </ul>
+</header>
+
     <!-- Navigation Arrows -->
     <div class="fixed inset-y-0 left-0 z-50 flex items-center pl-4">
         <button id="scrollLeft" class="p-2 rounded-full bg-white/70 backdrop-blur-sm shadow-lg hover:bg-white transition-all-smooth">
@@ -233,56 +265,63 @@
             </div>
         </section>
 
-        <!-- Detail Sections (each corresponding to a thumbnail) -->
         <!-- Certifications -->
-        <section class="main-section bg-gradient-to-br from-blue-50 to-blue-100">
-            <div class="h-full flex items-center justify-center">
-                <div class="max-w-5xl mx-auto px-8 py-12">
-                    <div class="flex flex-col md:flex-row gap-12 items-center">
-                        <div class="md:w-1/2">
-                            <div class="bg-white p-8 rounded-xl shadow-lg">
-                                <div class="flex justify-between items-start mb-6">
-                                    <div>
-                                        <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Featured</span>
-                                        <h2 class="text-3xl font-bold text-gray-800 mt-2 mb-1">Certifications Growth</h2>
-                                        <div class="text-blue-600 mb-4">200+ new certifications in 2023</div>
-                                    </div>
-                                    <div class="text-5xl text-blue-500">01</div>
-                                </div>
-                                <div class="space-y-4 text-gray-700">
-                                    <p>CAOSIA has achieved remarkable growth in certifications across multiple industries, solidifying our position as a global leader in certification services.</p>
-                                    <p>Our innovative certification programs have helped businesses worldwide improve their processes, meet regulatory requirements, and gain competitive advantages in their markets.</p>
-                                    <p>Key sectors experiencing growth include renewable energy, sustainable manufacturing, and digital security certifications.</p>
-                                </div>
-                                <button class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all-smooth">
-                                    Download Report <i class="fas fa-download ml-2"></i>
-                                </button>
+<section class="main-section bg-gradient-to-br from-blue-50 to-blue-100 relative">
+    <!-- VIDEO DE FONDO -->
+    <video autoplay muted loop playsinline
+        style="position:absolute; left:0; top:0; width:100vw; height:100vh; object-fit:cover; z-index:0;">
+        <source src="18069166-uhd_3840_2160_24fps.mp4" type="video/mp4">
+        Tu navegador no soporta el vídeo de fondo.
+    </video>
+    <div class="absolute inset-0 bg-black/20 z-10"></div>
+    <div class="relative z-20 h-full flex items-center justify-center">
+        <div class="max-w-5xl mx-auto px-8 py-12">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Featured</span>
+                                <h2 class="text-3xl font-bold text-gray-800 mt-2 mb-1">Certifications Growth</h2>
+                                <div class="text-blue-600 mb-4">200+ new certifications in 2023</div>
                             </div>
+                            <div class="text-5xl text-blue-500">01</div>
                         </div>
-                        <div class="md:w-1/2">
-                            <div class="relative">
-                                <div class="absolute -inset-4 bg-blue-200 rounded-2xl transform rotate-2"></div>
-                                <img src="https://via.placeholder.com/600x400/3b82f6/ffffff?text=Certifications+Growth" alt="Certifications Growth" class="relative rounded-xl shadow-lg">
-                            </div>
-                            <div class="mt-6 grid grid-cols-3 gap-4">
-                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
-                                    <div class="text-2xl font-bold text-blue-600">42%</div>
-                                    <div class="text-xs text-gray-600">Increase YOY</div>
-                                </div>
-                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
-                                    <div class="text-2xl font-bold text-blue-600">87</div>
-                                    <div class="text-xs text-gray-600">New standards</div>
-                                </div>
-                                <div class="bg-white p-4 rounded-lg text-center shadow-sm">
-                                    <div class="text-2xl font-bold text-blue-600">56</div>
-                                    <div class="text-xs text-gray-600">Countries</div>
-                                </div>
-                            </div>
+                        <div class="space-y-4 text-gray-700">
+                            <p>CAOSIA has achieved remarkable growth in certifications across multiple industries, solidifying our position as a global leader in certification services.</p>
+                            <p>Our innovative certification programs have helped businesses worldwide improve their processes, meet regulatory requirements, and gain competitive advantages in their markets.</p>
+                            <p>Key sectors experiencing growth include renewable energy, sustainable manufacturing, and digital security certifications.</p>
+                        </div>
+                        <button class="mt-6 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all-smooth">
+                            Download Report <i class="fas fa-download ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-blue-200 rounded-2xl transform rotate-2"></div>
+                        <img src="https://via.placeholder.com/600x400/3b82f6/ffffff?text=Certifications+Growth" alt="Certifications Growth" class="relative rounded-xl shadow-lg">
+                    </div>
+                    <div class="mt-6 grid grid-cols-3 gap-4">
+                        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                            <div class="text-2xl font-bold text-blue-600">42%</div>
+                            <div class="text-xs text-gray-600">Increase YOY</div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                            <div class="text-2xl font-bold text-blue-600">56</div>
+                            <div class="text-xs text-gray-600">Countries served</div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg text-center shadow-sm">
+                            <div class="text-2xl font-bold text-blue-600">200+</div>
+                            <div class="text-xs text-gray-600">New certifications</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
 
         <!-- Sustainability -->
         <section class="main-section bg-gradient-to-br from-teal-50 to-teal-100">
@@ -420,22 +459,37 @@
             </div>
         </section>
 
-        <!-- Tercera sección (ejemplo: Innovation) -->
-        <section class="main-section bg-gradient-to-br from-purple-50 to-purple-100 relative">
-            <!-- VIDEO DE FONDO -->
-            <video autoplay muted loop playsinline
-                style="position:absolute; left:0; top:0; width:100vw; height:100vh; object-fit:cover; z-index:0;">
-                <source src="18069166-uhd_3840_2160_24fps.mp4" type="video/mp4">
-                Tu navegador no soporta el vídeo de fondo.
-            </video>
-            <div class="absolute inset-0 bg-black/20 z-10"></div>
-            <div class="relative z-20 h-full flex items-center justify-center">
-                <!-- ...contenido existente de la sección... -->
-            </div>
-        </section>
+        
     </div>
 
     <script>
+function toggleNav() {
+  document.getElementById('nav-mobile').classList.toggle('hidden');
+}
+document.getElementById('nav-toggle').onclick = toggleNav;
+function scrollToSectionIndex(index) {
+  const container = document.querySelector('.horizontal-scroll-container');
+  const sections = document.querySelectorAll('.main-section');
+  if (container && sections[index]) {
+    container.scrollTo({
+      left: sections[index].offsetLeft,
+      behavior: 'smooth'
+    });
+  }
+}
+</script>
+    <script>
+function scrollToSectionIndex(index) {
+  const container = document.querySelector('.horizontal-scroll-container');
+  const sections = document.querySelectorAll('.main-section');
+  if (container && sections[index]) {
+    container.scrollTo({
+      left: sections[index].offsetLeft,
+      behavior: 'smooth'
+    });
+  }
+}
+
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.horizontal-scroll-container');
             const scrollLeftBtn = document.getElementById('scrollLeft');
